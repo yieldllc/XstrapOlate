@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xstrapolate - Crossplane Bootstrap CLI Tool</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', monospace;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .description {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>xstrapolate</h1>
+        <div class="logo-container">
+            <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background gradient -->
+                <defs>
+                    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+                    </linearGradient>
+                    
+                    <linearGradient id="terminalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#0f4c75;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#3282b8;stop-opacity:1" />
+                    </linearGradient>
+                    
+                    <linearGradient id="crossplaneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ee5a24;stop-opacity:1" />
+                    </linearGradient>
+
+                    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#00ff00;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#00cc00;stop-opacity:1" />
+                    </linearGradient>
+
+                    <!-- Glow effect -->
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- Main background circle -->
+                <circle cx="200" cy="200" r="190" fill="url(#bgGradient)"/>
+                
+                <!-- Terminal window -->
+                <rect x="60" y="120" width="280" height="200" rx="10" fill="#1a1a1a" stroke="#3282b8" stroke-width="2"/>
+                
+                <!-- Terminal header bar -->
+                <rect x="60" y="120" width="280" height="30" rx="10" fill="url(#terminalGradient)"/>
+                
+                <!-- Terminal window controls -->
+                <circle cx="80" cy="135" r="5" fill="#ff5f56"/>
+                <circle cx="95" cy="135" r="5" fill="#ffbd2e"/>
+                <circle cx="110" cy="135" r="5" fill="#27c93f"/>
+                
+                <!-- Terminal title -->
+                <text x="200" y="140" font-family="monospace" font-size="12" fill="white" text-anchor="middle">xstrapolate</text>
+                
+                <!-- Command line text -->
+                <text x="70" y="180" font-family="monospace" font-size="14" fill="#00ff00" filter="url(#glow)">
+                    $ xstrapolate init
+                </text>
+                
+                <text x="70" y="200" font-family="monospace" font-size="12" fill="#00cc00" opacity="0.8">
+                    ⚡ Bootstrapping Crossplane...
+                </text>
+                
+                <text x="70" y="220" font-family="monospace" font-size="12" fill="#00cc00" opacity="0.8">
+                    ✓ Provider configured
+                </text>
+                
+                <text x="70" y="240" font-family="monospace" font-size="12" fill="#00cc00" opacity="0.8">
+                    ✓ XRDs installed
+                </text>
+                
+                <text x="70" y="260" font-family="monospace" font-size="12" fill="#00cc00" opacity="0.8">
+                    ✓ Compositions ready
+                </text>
+                
+                <text x="70" y="280" font-family="monospace" font-size="12" fill="#00ff00" opacity="1">
+                    ✨ Bootstrap complete!
+                </text>
+                
+                <!-- Cursor blink -->
+                <rect x="70" y="295" width="8" height="14" fill="#00ff00">
+                    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Crossplane logo representation (simplified X) -->
+                <g transform="translate(200, 80)">
+                    <!-- X shape for Crossplane -->
+                    <path d="M -25 -25 L -10 -10 M 10 10 L 25 25 M -25 25 L -10 10 M 10 -10 L 25 -25" 
+                          stroke="url(#crossplaneGradient)" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+                    
+                    <!-- Center dot -->
+                    <circle cx="0" cy="0" r="5" fill="url(#crossplaneGradient)"/>
+                </g>
+                
+                <!-- Bootstrap arrows around -->
+                <g opacity="0.6">
+                    <!-- Top arrow -->
+                    <path d="M 200 40 L 195 50 L 200 48 L 205 50 Z" fill="#3282b8">
+                        <animateTransform attributeName="transform" type="translate" 
+                                        values="0,0; 0,-5; 0,0" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    
+                    <!-- Right arrow -->
+                    <path d="M 360 200 L 350 195 L 352 200 L 350 205 Z" fill="#3282b8">
+                        <animateTransform attributeName="transform" type="translate" 
+                                        values="0,0; 5,0; 0,0" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    
+                    <!-- Bottom arrow -->
+                    <path d="M 200 360 L 195 350 L 200 352 L 205 350 Z" fill="#3282b8">
+                        <animateTransform attributeName="transform" type="translate" 
+                                        values="0,0; 0,5; 0,0" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    
+                    <!-- Left arrow -->
+                    <path d="M 40 200 L 50 195 L 48 200 L 50 205 Z" fill="#3282b8">
+                        <animateTransform attributeName="transform" type="translate" 
+                                        values="0,0; -5,0; 0,0" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+                
+                <!-- Decorative dots (representing data flow) -->
+                <g opacity="0.5">
+                    <circle cx="100" cy="80" r="2" fill="#3282b8">
+                        <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="300" cy="80" r="2" fill="#3282b8">
+                        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="100" cy="340" r="2" fill="#3282b8">
+                        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="300" cy="340" r="2" fill="#3282b8">
+                        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                </g>
+            </svg>
+        </div>
+        <div class="description">
+            <p><strong>xstrapolate</strong></p>
+            <p>A powerful CLI tool for bootstrapping and managing Crossplane configurations</p>
+            <p style="color: #999; font-size: 14px;">Initialize providers, install XRDs, and deploy compositions with ease</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background gradient -->
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="terminalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#0f4c75;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#3282b8;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="crossplaneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ee5a24;stop-opacity:1" />
+        </linearGradient>
+
+        <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#00ff00;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#00cc00;stop-opacity:1" />
+        </linearGradient>
+
+        <!-- Glow effect -->
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <!-- Shadow effect -->
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.2"/>
+        </filter>
+    </defs>
+    
+    <!-- Main background circle -->
+    <circle cx="200" cy="200" r="190" fill="url(#bgGradient)"/>
+    
+    <!-- Terminal window -->
+    <rect x="60" y="120" width="280" height="200" rx="10" fill="#1a1a1a" stroke="#3282b8" stroke-width="2" filter="url(#shadow)"/>
+    
+    <!-- Terminal header bar -->
+    <rect x="60" y="120" width="280" height="30" rx="10" fill="url(#terminalGradient)"/>
+    
+    <!-- Terminal window controls -->
+    <circle cx="80" cy="135" r="5" fill="#ff5f56"/>
+    <circle cx="95" cy="135" r="5" fill="#ffbd2e"/>
+    <circle cx="110" cy="135" r="5" fill="#27c93f"/>
+    
+    <!-- Terminal title -->
+    <text x="200" y="140" font-family="monospace" font-size="12" fill="white" text-anchor="middle">xstrapolate</text>
+    
+    <!-- Command line text -->
+    <text x="70" y="180" font-family="monospace" font-size="14" fill="#00ff00" filter="url(#glow)">
+        $ xstrapolate init
+    </text>
+    
+    <text x="70" y="200" font-family="monospace" font-size="12" fill="#00cc00" opacity="0.8">
+        ⚡ Bootstrapping Crossplane...
+    </text>
+    
+    <text x="70" y="220" font-family="monospace" font-size="12" fill="#00cc00" opacity="0.8">
+        ✓ Provider configured
+    </text>
+    
+    <text x="70" y="240" font-family="monospace" font-size="12" fill="#00cc00" opacity="0.8">
+        ✓ XRDs installed
+    </text>
+    
+    <text x="70" y="260" font-family="monospace" font-size="12" fill="#00cc00" opacity="0.8">
+        ✓ Compositions ready
+    </text>
+    
+    <text x="70" y="280" font-family="monospace" font-size="12" fill="#00ff00" opacity="1">
+        ✨ Bootstrap complete!
+    </text>
+    
+    <!-- Cursor -->
+    <rect x="70" y="295" width="8" height="14" fill="#00ff00" opacity="1"/>
+    
+    <!-- Crossplane logo representation (simplified X) -->
+    <g transform="translate(200, 80)">
+        <!-- X shape for Crossplane -->
+        <path d="M -25 -25 L -10 -10 M 10 10 L 25 25 M -25 25 L -10 10 M 10 -10 L 25 -25" 
+              stroke="url(#crossplaneGradient)" stroke-width="4" stroke-linecap="round" opacity="0.9" filter="url(#glow)"/>
+        
+        <!-- Center dot -->
+        <circle cx="0" cy="0" r="5" fill="url(#crossplaneGradient)"/>
+    </g>
+    
+    <!-- Bootstrap arrows around -->
+    <g opacity="0.6">
+        <!-- Top arrow -->
+        <path d="M 200 35 L 195 45 L 200 43 L 205 45 Z" fill="#3282b8"/>
+        
+        <!-- Right arrow -->
+        <path d="M 365 200 L 355 195 L 357 200 L 355 205 Z" fill="#3282b8"/>
+        
+        <!-- Bottom arrow -->
+        <path d="M 200 365 L 195 355 L 200 357 L 205 355 Z" fill="#3282b8"/>
+        
+        <!-- Left arrow -->
+        <path d="M 35 200 L 45 195 L 43 200 L 45 205 Z" fill="#3282b8"/>
+    </g>
+    
+    <!-- Decorative dots (representing data flow) -->
+    <g opacity="0.7">
+        <circle cx="100" cy="80" r="3" fill="#3282b8"/>
+        <circle cx="300" cy="80" r="3" fill="#3282b8"/>
+        <circle cx="100" cy="340" r="3" fill="#3282b8"/>
+        <circle cx="300" cy="340" r="3" fill="#3282b8"/>
+    </g>
+
+    <!-- Version badge -->
+    <rect x="270" y="85" width="60" height="20" rx="10" fill="#3282b8" opacity="0.8"/>
+    <text x="300" y="98" font-family="monospace" font-size="10" fill="white" text-anchor="middle">v1.0.0</text>
+</svg>
