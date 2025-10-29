@@ -1,4 +1,4 @@
-module github.com/yieldllc/xstrapolate
+module github.com/drduker/xstrapolate
 
 go 1.21
 

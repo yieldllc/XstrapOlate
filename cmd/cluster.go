@@ -3,10 +3,10 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/drduker/xstrapolate/pkg/cloud"
+	"github.com/drduker/xstrapolate/pkg/k8s"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/yieldllc/xstrapolate/pkg/cloud"
-	"github.com/yieldllc/xstrapolate/pkg/k8s"
 )
 
 var clusterCmd = &cobra.Command{

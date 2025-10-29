@@ -4,9 +4,9 @@
 
 **A powerful CLI tool for creating lightweight Kubernetes clusters with Flux and GitOps-managed Crossplane**
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yieldllc/xstrapolate/releases)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/drduker/xstrapolate/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/yieldllc/xstrapolate)](https://goreportcard.com/report/github.com/yieldllc/xstrapolate)
+[![Go Report Card](https://goreportcard.com/badge/github.com/drduker/xstrapolate)](https://goreportcard.com/report/github.com/drduker/xstrapolate)
 
 </div>
 
@@ -18,7 +18,7 @@ xstrapolate creates lightweight Kubernetes clusters with Flux pre-installed and 
 
 ```bash
 # Clone and build
-git clone https://github.com/yieldllc/xstrapolate.git
+git clone https://github.com/drduker/xstrapolate.git
 cd xstrapolate
 go build -o xstrapolate .
 
@@ -53,7 +53,7 @@ go build -o xstrapolate .
 
 ```bash
 # Clone the repository
-git clone https://github.com/yieldllc/xstrapolate.git
+git clone https://github.com/drduker/xstrapolate.git
 cd xstrapolate
 
 # Download dependencies and build

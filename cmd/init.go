@@ -1,8 +1,8 @@
 package cmd
 
 import (
+	"github.com/drduker/xstrapolate/pkg/config"
 	"github.com/spf13/cobra"
-	"github.com/yieldllc/xstrapolate/pkg/config"
 )
 
 var initCmd = &cobra.Command{

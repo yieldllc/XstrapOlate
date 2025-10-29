@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/yieldllc/xstrapolate/cmd"
+	"github.com/drduker/xstrapolate/cmd"
 )
 
 var version = "dev"
