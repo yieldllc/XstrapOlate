@@ -1,0 +1,130 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., v0.0.1)'
+        required: true
+        default: 'v0.0.1'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Get version
+      id: version
+      run: |
+        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+        else
+          echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Build binaries
+      run: |
+        # Create dist directory
+        mkdir -p dist
+
+        # Build for multiple platforms
+        GOOS=linux GOARCH=amd64 go build -ldflags="-X 'main.version=${{ steps.version.outputs.version }}'" -o dist/xstrapolate-linux-amd64 .
+        GOOS=linux GOARCH=arm64 go build -ldflags="-X 'main.version=${{ steps.version.outputs.version }}'" -o dist/xstrapolate-linux-arm64 .
+        GOOS=darwin GOARCH=amd64 go build -ldflags="-X 'main.version=${{ steps.version.outputs.version }}'" -o dist/xstrapolate-darwin-amd64 .
+        GOOS=darwin GOARCH=arm64 go build -ldflags="-X 'main.version=${{ steps.version.outputs.version }}'" -o dist/xstrapolate-darwin-arm64 .
+        GOOS=windows GOARCH=amd64 go build -ldflags="-X 'main.version=${{ steps.version.outputs.version }}'" -o dist/xstrapolate-windows-amd64.exe .
+
+        # Create checksums
+        cd dist
+        sha256sum * > checksums.txt
+        cd ..
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.version.outputs.version }}
+        name: Release ${{ steps.version.outputs.version }}
+        body: |
+          ## Changes
+
+          - Single-node Kubernetes clusters with k3s, Flux, and Crossplane
+          - Private subnet deployment with SSM access (no public IPs)
+          - Comprehensive AWS resource cleanup with `teardown` command
+          - Tag-based resource management for safe deletion
+          - Multi-platform binaries available
+
+          ## Installation
+
+          Download the appropriate binary for your platform:
+
+          ### Linux (x86_64)
+          ```bash
+          curl -L -o xstrapolate https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.version }}/xstrapolate-linux-amd64
+          chmod +x xstrapolate
+          sudo mv xstrapolate /usr/local/bin/
+          ```
+
+          ### Linux (ARM64)
+          ```bash
+          curl -L -o xstrapolate https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.version }}/xstrapolate-linux-arm64
+          chmod +x xstrapolate
+          sudo mv xstrapolate /usr/local/bin/
+          ```
+
+          ### macOS (Intel)
+          ```bash
+          curl -L -o xstrapolate https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.version }}/xstrapolate-darwin-amd64
+          chmod +x xstrapolate
+          sudo mv xstrapolate /usr/local/bin/
+          ```
+
+          ### macOS (Apple Silicon)
+          ```bash
+          curl -L -o xstrapolate https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.version }}/xstrapolate-darwin-arm64
+          chmod +x xstrapolate
+          sudo mv xstrapolate /usr/local/bin/
+          ```
+
+          ### Windows (x86_64)
+          Download `xstrapolate-windows-amd64.exe` and add to your PATH.
+
+          ## Usage
+
+          ```bash
+          # Create a cluster
+          xstrapolate cluster create dev --cloud aws --type single-node
+
+          # Connect via SSM
+          aws ssm start-session --target <instance-id>
+
+          # Delete cluster and all resources
+          xstrapolate cluster teardown dev --cloud aws --force
+          ```
+
+          ## Verify checksums
+          ```bash
+          curl -L -o checksums.txt https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.version }}/checksums.txt
+          sha256sum -c checksums.txt
+          ```
+        files: |
+          dist/xstrapolate-linux-amd64
+          dist/xstrapolate-linux-arm64
+          dist/xstrapolate-darwin-amd64
+          dist/xstrapolate-darwin-arm64
+          dist/xstrapolate-windows-amd64.exe
+          dist/checksums.txt
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
